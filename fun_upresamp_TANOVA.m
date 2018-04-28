@@ -1,15 +1,27 @@
-function [p,mean_error] = fun_upresamp_TANOVA(x,y)
+function [p,mean_error] = fun_upresamp_TANOVA(x,y, nboot)
+% Inputs 
+% x = [1 5 7 8 9 10]; x is dataset 1 
+% y = [2 6 7 8.5 9.5  11]; Y is dataset 2
+% nboot = number of randmoizations/reshuffling, default is 500
+% randomizations
+
+% Outputs
+% p = p-values, proportion of getting the particular difference in TANOVA between x
+% and y in the resampled distribution
+% mean_error = mean of the resampled distribution
+
 
 % x = x';
 % y = y';
+%nboot
+if iscell(nboot)
+nboot = nboot{1};
+end
 
-%%
-%Input should be channel by subject matrices chan*subject
-% x = [1 5 7 8 9 10];
-% y = [2 6 7 8.5 9.5  11];
-% n = length(x);
 n = size(x,2)+size(y,2);
+if ~exist('nboot')
 nboot = 500;
+end
 xavg = mean(x,2);
 yavg = mean(y,2);
 

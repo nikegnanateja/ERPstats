@@ -1,7 +1,15 @@
-function [blnkarray, sampout] = clusthr(pval,nbincell)
+function [blnkarray, sampout] = clusthr(pval,nbincell, set_pcell)
+
+if iscell(set_pcell)
+set_p = set_pcell{1};
+end
+set_p = set_pcell;
+
+
+
 nbins = nbincell;
 pthr = zeros(length(pval),1); 
-pthr(pval<=0.05) = 1;
+pthr(pval<=set_p) = 1;
 
 pdiff = diff(pthr);
 pdiffind = find(pdiff);
@@ -13,7 +21,6 @@ if pdiff(pdiffind(1))<0
     end
 if rem(length(pdiffind),2)>0
     pdiffind(length(pdiffind)) = [];
-
 end
 
 pdiffresh = [];

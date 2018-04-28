@@ -1,16 +1,33 @@
-function [p,mean_error] = fun_presamp(x,y)
+function [p,mean_error] = fun_presamp(x,y,nboot)
 
+% Inputs 
+% x = [1 5 7 8 9 10]; x is dataset 1 
+% y = [2 6 7 8.5 9.5  11]; Y is dataset 2
+% nboot = number of randmoizations/reshuffling, default is 500
+% randomizations
+
+% Outputs
+% p = p-values, proportion of getting the particular difference between x
+% and y in the resampled distribution
+% mean_error = mean of the resampled distribution
+
+
+% n = length(x);
 % x = x';
 % y = y';
 
 %%
-
+if iscell(nboot)
+nboot = nboot{1};
+end
 % x = [1 5 7 8 9 10];
 % y = [2 6 7 8.5 9.5  11];
 % n = length(x);
 x = squeeze(x);y = squeeze(y);
 x = x';y = y';
+if ~exist('nboot')
 nboot = 500;
+end
 main_mean = mean(x-y);
 
 %%

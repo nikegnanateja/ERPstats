@@ -1,0 +1,1 @@
+Verbose output of the Statistical comparisons comparing triggers 50 & 50 p threshold = 0.05 
